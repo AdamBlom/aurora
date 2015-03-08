@@ -1,14 +1,13 @@
 <?php
 	require_once "functions.php";
-	if(isset($_GET['asset'])) {
+	/*if(isset($_GET['asset'])) {
 		switch($_GET['asset']) {
 			case "track":
 			case "subgroup":
 			case "group":
-				include "add-data.php";
 				break;
 		}
-	}
+	}*/
 ?>
 
 <!DOCTYPE html>
@@ -16,6 +15,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>Add Media</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	</head>
 	<body>
 		<div id="wrapper">

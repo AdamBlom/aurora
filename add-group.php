@@ -1,36 +1,42 @@
 <?php
 	require_once "functions.php";
+
 ?>
 
-<h2>Sub-Group Information</h2>
 
-<p>Coming Soon</p>
+<h2>Group Information</h2>
 
-<div><label for="series_id">Group: </label></div>
-	<div>
-		<select id="group_id" name="ser_id">
-			<option value="0">-- No Group --</option>
-			<?php
-				$query1 = "SELECT * FROM `lps_pla_group` WHERE `pla_grp_media_type` = 'video' AND `pla_grp_type` = 'episodic' ORDER BY `pla_grp_sort_title` ASC";
-				$query2 = "SELECT * FROM `lps_pla_group` WHERE `pla_grp_media_type` = 'video' AND `pla_grp_type` = 'related' ORDER BY `pla_grp_sort_title` ASC";
+<form action="add2.php" method="post">
+<div id="media">
+	<label for="media_type">Select Media:</label>
+	<select id="media_type" name="media_type">
+		<option value="0">Select...</option>
+		<option value="video">Video</option>
+		<option value="audio">Audio</option>
+	</select>
+</div>
 
-				$result1 = $link->query($query1);
-				$result2 = $link->query($query2);
-				
-				if(!is_null($result1)) {
-					echo "<p>Episodic</p>"
-					while($row1 = $result1->fetch_array()) { //Need to parental controls for content in query
-						echo "<option value'".$row1['pla_grp_id'].">".$row1['pla_grp_title']."</option>";
-					}
-				}
+<div id="video_info" style="display:none">Video</div>
+<div id="audio_info" style="display:none">Audio</div>
 
-				if(!is_null($result1)) {
-					echo "<p>Related</p>"
-					while($row2 = $result2->fetch_array()) { //Need to parental controls for content in query
-						echo "<option value'".$row2['pla_grp_id'].">".$row2['pla_grp_title']."</option>";
-					}
-				}
-			?>
-		</select>
-		<p><a href="add.php?asset=group">Add Group</a></p>
-	</div>
+<script>
+	$("#media_type").on("change", function (e) {
+		e.stopPropagation();
+		switch($("#media_type").val()) {
+			case "video":
+				$("#audio_info").slideUp(250, function() {
+					$("#video_info").slideDown(250);
+				});
+				break;
+			case "audio":
+				$("#video_info").slideUp(250, function() {
+					$("#audio_info").slideDown(250);
+				});
+				break;
+			default:
+				$("#video_info, #audio_info").slideUp(250);
+		}
+	});
+
+
+</script>

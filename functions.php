@@ -14,9 +14,9 @@
 
 	/* Groups */
 
-	function get_groups($db,$id) {
+	function get_groups($db,$media,$id) {
 		if($id="all") {
-			$query = "SELECT * FROM `lps_pla_group` WHERE `pla_grp_media_type` = 'video' AND (`pla_grp_type` = 'episodic' OR `pla_grp_type` = 'related') ORDER BY `pla_grp_sort_title` ASC";
+			$query = "SELECT * FROM `lps_pla_group` WHERE `pla_grp_media_type` = '$media' AND (`pla_grp_type` = 'episodic' OR `pla_grp_type` = 'related') ORDER BY `pla_grp_sort_title` ASC";
 		} else {
 			$query = "SELECT * FROM `lps_pla_group` WHERE `pla_grp_id` = '$id'";
 		}
